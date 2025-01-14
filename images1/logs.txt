@@ -1,0 +1,2 @@
+index 10
+re-from 7 - 7 is squared, mobile alignment cleared, but before placeholder

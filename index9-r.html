@@ -36,6 +36,15 @@
       pointer-events: none; /* Disables interaction with the image */
     }
 
+    /* Styling for the placeholder image (smaller size, like an icon) */
+    .product-card img[src="placeholder.svg"] {
+      width: 50px; /* Set placeholder width to 50px, like an icon */
+      height: 50px; /* Set placeholder height to 50px */
+      object-fit: contain; /* Preserve aspect ratio */
+      display: block; /* Remove extra space below the image */
+      margin: 0 auto; /* Center the placeholder */
+    }
+
     .product-name {
       font-size: 16px;
       margin: 10px 0 5px;
@@ -92,7 +101,7 @@
 <body>
 
   <div class="product-card">
-    <img data-src="images/image_1.svg" src="placeholder.svg" alt="Product 1">
+    <img data-src="images/image_1.jpg" src="placeholder.svg" alt="Product 1">
     <div class="product-name">Product Name 1</div>
     <div class="combo-text">Available in Combo</div>
   </div>

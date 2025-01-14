@@ -64,65 +64,42 @@
     document.addEventListener("contextmenu", (e) => {
       e.preventDefault();
     });
-
-    // Lazy load images when they come into view
-    document.addEventListener("DOMContentLoaded", () => {
-      const images = document.querySelectorAll("img[data-src]");
-
-      const loadImage = (image) => {
-        image.src = image.getAttribute("data-src");
-        image.removeAttribute("data-src");
-      };
-
-      const imageObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            loadImage(entry.target);
-            imageObserver.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.1 });
-
-      images.forEach(image => {
-        imageObserver.observe(image);
-      });
-    });
   </script>
 </head>
 <body>
 
   <div class="product-card">
-    <img data-src="images/image_1.svg" src="placeholder.svg" alt="Product 1">
+    <img src="images/image_1.jpg" alt="Product 1">
     <div class="product-name">Product Name 1</div>
     <div class="combo-text">Available in Combo</div>
   </div>
 
   <div class="product-card">
-    <img data-src="images/image_2.jpg" src="placeholder.svg" alt="Product 2">
+    <img src="images/image_2.jpg" alt="Product 2">
     <div class="product-name">Product Name 2</div>
     <div class="combo-text">available</div>
   </div>
 
   <div class="product-card">
-    <img data-src="images/image_3.jpg" src="placeholder.svg" alt="Product 3">
+    <img src="images/image_3.jpg" alt="Product 3">
     <div class="product-name">Product Name 3</div>
     <div class="combo-text">Available in Combo</div>
   </div>
 
   <div class="product-card">
-    <img data-src="images/image_4.jpg" src="placeholder.svg" alt="Product 4">
+    <img src="images/image_4.jpg" alt="Product 4">
     <div class="product-name">Product Name 4</div>
     <div class="combo-text">available in combo</div>
   </div>
 
   <div class="product-card">
-    <img data-src="images/image_5.jpg" src="placeholder.svg" alt="Product 5">
+    <img src="images/image_5.jpg" alt="Product 5">
     <div class="product-name">Product Name 5</div>
     <div class="combo-text">available in combo</div>
   </div>
 
   <div class="product-card">
-    <img data-src="images/image_6.jpg" src="placeholder.svg" alt="Product 6">
+    <img src="images/image_6.jpg" alt="Product 6">
     <div class="product-name">Product Name 6</div>
     <div class="combo-text">available in combo</div>
   </div>
