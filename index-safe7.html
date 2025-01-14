@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Cards</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 20px;
+      font-family: Arial, sans-serif;
+      background-color: #ffffff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .product-card {
+      background-color: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 0 6px 4px rgba(0, 0, 0, 0.1);
+      width: 100%; /* Full width by default */
+      max-width: 300px; /* Limit maximum width for larger screens */
+      padding: 15px;
+      text-align: center;
+      box-sizing: border-box; /* Ensures padding doesn't affect the width */
+    }
+
+    .product-card img {
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+      border-radius: 12px;
+      pointer-events: none; /* Disables interaction with the image */
+    }
+
+    .product-name {
+      font-size: 16px;
+      margin: 10px 0 5px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    .combo-text {
+      font-size: 10px;
+      background-color: rgb(249, 249, 114);
+      padding: 3px;
+      border-radius: 5px;
+      display: inline-block;
+      margin-top: 5px;
+    }
+
+    /* Mobile-specific adjustments */
+    @media (max-width: 600px) {
+      .product-card {
+        width: 90%; /* Make cards take up 90% of the screen width on mobile */
+      }
+    }
+  </style>
+  <script>
+    // Disable right-click globally
+    document.addEventListener("contextmenu", (e) => {
+      e.preventDefault();
+    });
+
+    // Lazy load images when they come into view
+    document.addEventListener("DOMContentLoaded", () => {
+      const images = document.querySelectorAll("img[data-src]");
+
+      const loadImage = (image) => {
+        image.src = image.getAttribute("data-src");
+        image.removeAttribute("data-src");
+      };
+
+      const imageObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            loadImage(entry.target);
+            imageObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1 });
+
+      images.forEach(image => {
+        imageObserver.observe(image);
+      });
+    });
+  </script>
+</head>
+<body>
+
+  <div class="product-card">
+    <img data-src="images/image_1.svg" src="placeholder.svg" alt="Product 1">
+    <div class="product-name">Product Name 1</div>
+    <div class="combo-text">Available in Combo</div>
+  </div>
+
+  <div class="product-card">
+    <img data-src="images/image_2.jpg" src="placeholder.svg" alt="Product 2">
+    <div class="product-name">Product Name 2</div>
+    <div class="combo-text">available</div>
+  </div>
+
+  <div class="product-card">
+    <img data-src="images/image_3.jpg" src="placeholder.svg" alt="Product 3">
+    <div class="product-name">Product Name 3</div>
+    <div class="combo-text">Available in Combo</div>
+  </div>
+
+  <div class="product-card">
+    <img data-src="images/image_4.jpg" src="placeholder.svg" alt="Product 4">
+    <div class="product-name">Product Name 4</div>
+    <div class="combo-text">available in combo</div>
+  </div>
+
+  <div class="product-card">
+    <img data-src="images/image_5.jpg" src="placeholder.svg" alt="Product 5">
+    <div class="product-name">Product Name 5</div>
+    <div class="combo-text">available in combo</div>
+  </div>
+
+  <div class="product-card">
+    <img data-src="images/image_6.jpg" src="placeholder.svg" alt="Product 6">
+    <div class="product-name">Product Name 6</div>
+    <div class="combo-text">available in combo</div>
+  </div>
+
+</body>
+</html>
