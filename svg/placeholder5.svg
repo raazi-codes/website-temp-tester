@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 300" width="200" height="300">
+  <!-- Candy Body -->
+  <ellipse cx="100" cy="120" rx="60" ry="100" fill="#FFB6C1" stroke="black" stroke-width="3"/>
+
+  <!-- Candy Wrappers -->
+  <polygon points="40,60 0,100 40,140" fill="#FF69B4"/>
+  <polygon points="160,60 200,100 160,140" fill="#FF69B4"/>
+
+  <!-- Eyes -->
+  <circle cx="70" cy="100" r="10" fill="white" stroke="black" stroke-width="2"/>
+  <circle cx="130" cy="100" r="10" fill="white" stroke="black" stroke-width="2"/>
+  <circle cx="70" cy="100" r="5" fill="black"/>
+  <circle cx="130" cy="100" r="5" fill="black"/>
+
+  <!-- Sad Mouth -->
+  <path d="M 60 150 Q 100 170, 140 150" stroke="black" stroke-width="3" fill="transparent" />
+
+  <!-- Legs -->
+  <line x1="70" y1="220" x2="70" y2="260" stroke="black" stroke-width="4"/>
+  <line x1="130" y1="220" x2="130" y2="260" stroke="black" stroke-width="4"/>
+
+  <!-- Hands -->
+  <line x1="40" y1="160" x2="10" y2="180" stroke="black" stroke-width="4"/>
+  <line x1="160" y1="160" x2="190" y2="180" stroke="black" stroke-width="4"/>
+</svg>

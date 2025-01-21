@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Cards</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 20px;
+      font-family: Arial, sans-serif;
+      background-color: #ffffff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .product-card {
+      background-color: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 0 6px 4px rgba(0, 0, 0, 0.1);
+      width: 100%; /* Full width by default */
+      max-width: 300px; /* Limit maximum width for larger screens */
+      height: 360px;
+      padding: 15px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between; /* Keeps name and price at the bottom */
+      text-align: center;
+      box-sizing: border-box; /* Ensures padding doesn't affect the width */
+    }
+
+    .product-card img {
+      width: 100%;
+      height: 150px; /* Fixed height to reserve space */
+      object-fit: cover;
+      border-radius: 12px;
+      pointer-events: none; /* Disables interaction with the image */
+      background-color: #f0f0f0; /* Placeholder background */
+    }
+
+    .product-name {
+      font-size: 16px;
+      margin: 10px 0 5px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    .combo-text {
+      font-size: 10px;
+      background-color: rgb(249, 249, 114);
+      padding: 3px;
+      border-radius: 5px;
+      display: inline-block;
+      margin-top: 5px;
+    }
+
+    /* Mobile-specific adjustments */
+    @media (max-width: 600px) {
+      .product-card {
+        width: 90%; /* Make cards take up 90% of the screen width on mobile */
+      }
+    }
+  </style>
+  <script>
+    // Disable right-click globally
+    document.addEventListener("contextmenu", (e) => {
+      e.preventDefault();
+    });
+
+    // Lazy load images when they come into view
+    document.addEventListener("DOMContentLoaded", () => {
+      const images = document.querySelectorAll("img[data-src]");
+
+      const loadImage = (image) => {
+        image.src = image.getAttribute("data-src");
+        image.removeAttribute("data-src");
+      };
+
+      const imageObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            loadImage(entry.target);
+            imageObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1 });
+
+      images.forEach(image => {
+        imageObserver.observe(image);
+      });
+    });
+  </script>
+</head>
+<body>
+
+  <div class="product-card">
+    <div class="product-name">Product Name 1</div>
+    <img data-src="images/image_11.svg" src="placeholder.svg" alt="Product 1">
+    <div class="combo-text">Available in Combo</div>
+  </div>
+
+  <div class="product-card">
+    <img data-src="images/image_2.1.jpg" src="placeholder.svg" alt="Product 2">
+    <div class="product-name">Product Name 2</div>
+    <div class="combo-text">Available</div>
+  </div>
+
+  <div class="product-card">
+    <img data-src="images/image_3.jpg" src="placeholder.svg" alt="Product 3">
+    <div class="product-name">Product Name 3</div>
+    <div class="combo-text">Available in Combo</div>
+  </div>
+
+  <div class="product-card">
+    <div class="product-name">Product Name 1</div>
+    <img data-src="images/image_11.svg" src="placeholder.svg" alt="Product 1">
+    
+    <div class="combo-text">Available in Combo</div>
+  </div>
+
+  <div class="product-card">
+    <img data-src="images/image_2.1.jpg" src="placeholder.svg" alt="Product 2">
+    <div class="product-name">Product Name 2</div>
+    <div class="combo-text">available</div>
+  </div>
+
+  <div class="product-card">
+    <img data-src="images/image_3.jpg" src="placeholder.svg" alt="Product 3">
+    <div class="product-name">Product Name 3</div>
+    <div class="combo-text">Available in Combo</div>
+  </div>
+
+  <div class="product-card">
+    <img data-src="images/image_4.jpg" src="placeholder.svg" alt="Product 4">
+    <div class="product-name">Product Name 4</div>
+    <div class="combo-text">available in combo</div>
+  </div>
+
+  <div class="product-card">
+    <img data-src="images/image_5.jpg" src="placeholder.svg" alt="Product 5">
+    <div class="product-name">Product Name 5</div>
+    <div class="combo-text">available in combo</div>
+  </div>
+
+  <div class="product-card">
+      <img data-src="images/image_6.jpg" src="placeholder.svg" alt="Product 6">
+      <div class="product-name">Product Name 6</div>
+      <div class="combo-text">available in combo</div>
+  </div>
+
+  <div class="product-card">
+      <img data-src="images/image_7.jpg" src="placeholder.svg" alt="Product 7">
+      <div class="product-name">Product Name 7</div>
+      <div class="combo-text">available in combo</div>
+  </div>
+
+  <div class="product-card">
+      <img data-src="images/image_8.jpg" src="placeholder.svg" alt="Product 8">
+      <div class="product-name">Product Name 8</div>
+      <div class="combo-text">available in combo</div>
+  </div>
+
+  <div class="product-card">
+      <img data-src="images/image_9.jpg" src="placeholder.svg" alt="Product 9">
+      <div class="product-name">Product Name 9</div>
+      <div class="combo-text">available in combo</div>
+  </div>
+
+  <div class="product-card">
+      <img data-src="images/image_10.jpg" src="placeholder.svg" alt="Product 10">
+      <div class="product-name">Product Name 10</div>
+      <div class="combo-text">available in combo</div>
+  </div>
+
+  <div class="product-card">
+      <img data-src="images/image_11.jpg" src="placeholder.svg" alt="Product 11">
+      <div class="product-name">Product Name 11</div>
+      <div class="combo-text">available in combo</div>
+  </div>
+
+  <div class="product-card">
+      <img data-src="images/image_12.jpg" src="placeholder.svg" alt="Product 12">
+      <div class="product-name">Product Name 12</div>
+      <div class="combo-text">available in combo</div>
+  </div>
+
+  <div class="product-card">
+      <img data-src="images/image_13.jpg" src="placeholder.svg" alt="Product 13">
+      <div class="product-name">Product Name 13</div>
+      <div class="combo-text">available in combo</div>
+  </div>
+
+  <div class="product-card">
+      <img data-src="images/image_14.jpg" src="placeholder.svg" alt="Product 14">
+      <div class="product-name">Product Name 14</div>
+      <div class="combo-text">available in combo</div>
+  </div>
+
+  <div class="product-card">
+      <img data-src="images/image_15.jpg" src="placeholder.svg" alt="Product 15">
+      <div class="product-name">Product Name 15</div>
+      <div class="combo-text">available in combo</div>
+  </div>
+
+  <div class="product-card">
+      <img data-src="images/image_16.jpg" src="placeholder.svg" alt="Product 16">
+      <div class="product-name">Product Name 16</div>
+      <div class="combo-text">available in combo</div>
+  </div>
+
+  <div class="product-card">
+      <img data-src="images/image_17.jpg" src="placeholder.svg" alt="Product 17">
+      <div class="product-name">Product Name 17</div>
+      <div class="combo-text">available in combo</div>
+  </div>
+
+  <div class="product-card">
+      <img data-src="images/image_18.jpg" src="placeholder.svg" alt="Product 18">
+      <div class="product-name">Product Name 18</div>
+      <div class="combo-text">available in combo</div>
+  </div>
+
+  <div class="product-card">
+      <img data-src="images/image_19.jpg" src="placeholder.svg" alt="Product 19">
+      <div class="product-name">Product Name 19</div>
+      <div class="combo-text">available in combo</div>
+  </div>
+
+  <div class="product-card">
+    <img data-src="images/image_20.jpg" src="placeholder.svg" alt="Product 20">
+    <div class="product-name">Product Name 20</div>
+    <div class="combo-text">available in combo</div>
+</div>
+
+<div class="product-card">
+    <img data-src="images/image_21.jpg" src="placeholder.svg" alt="Product 21">
+    <div class="product-name">Product Name 21</div>
+    <div class="combo-text">available in combo</div>
+</div>
+
+<div class="product-card">
+    <img data-src="images/image_22.jpg" src="placeholder.svg" alt="Product 22">
+    <div class="product-name">Product Name 22</div>
+    <div class="combo-text">available in combo</div>
+</div>
+
+<div class="product-card">
+    <img data-src="images/image_23.jpg" src="placeholder.svg" alt="Product 23">
+    <div class="product-name">Product Name 23</div>
+    <div class="combo-text">available in combo</div>
+</div>
+
+<div class="product-card">
+    <img data-src="images/image_24.jpg" src="placeholder.svg" alt="Product 24">
+    <div class="product-name">Product Name 24</div>
+    <div class="combo-text">available in combo</div>
+</div>
+
+<div class="product-card">
+    <img data-src="images/image_25.jpg" src="placeholder.svg" alt="Product 25">
+    <div class="product-name">Product Name 25</div>
+    <div class="combo-text">available in combo</div>
+</div>
+
+<div class="product-card">
+    <img data-src="images/image_26.jpg" src="placeholder.svg" alt="Product 26">
+    <div class="product-name">Product Name 26</div>
+    <div class="combo-text">available in combo</div>
+</div>
+
+<div class="product-card">
+    <img data-src="images/image_27.jpg" src="placeholder.svg" alt="Product 27">
+    <div class="product-name">Product Name 27</div>
+    <div class="combo-text">available in combo</div>
+</div>
+
+<div class="product-card">
+    <img data-src="images/image_28.jpg" src="placeholder.svg" alt="Product 28">
+    <div class="product-name">Product Name 28</div>
+    <div class="combo-text">available in combo</div>
+</div>
+
+<div class="product-card">
+    <img data-src="images/image_29.jpg" src="placeholder.svg" alt="Product 29">
+    <div class="product-name">Product Name 29</div>
+    <div class="combo-text">available in combo</div>
+</div>
+
+<div class="product-card">
+    <img data-src="images/image_30.jpg" src="placeholder.svg" alt="Product 30">
+    <div class="product-name">Product Name 30</div>
+    <div class="combo-text">available in combo</div>
+</div>
+
+<div class="product-card">
+    <img data-src="images/image_31.jpg" src="placeholder.svg" alt="Product 31">
+    <div class="product-name">Product Name 31</div>
+    <div class="combo-text">available in combo</div>
+</div>
+
+<div class="product-card">
+  <img data-src="images/image_40.jpg" src="placeholder.svg" alt="Product 40">
+  <div class="product-name">Product Name 40</div>
+  <div class="combo-text">available in combo</div>
+</div>
+
+<div class="product-card">
+  <img data-src="images/image_41.jpg" src="placeholder.svg" alt="Product 41">
+  <div class="product-name">Product Name 41</div>
+  <div class="combo-text">available in combo</div>
+</div>
+
+<div class="product-card">
+  <img data-src="images/image_42.jpg" src="placeholder.svg" alt="Product 42">
+  <div class="product-name">Product Name 42</div>
+  <div class="combo-text">available in combo</div>
+</div>
+
+<div class="product-card">
+  <img data-src="images/image_43.jpg" src="placeholder.svg" alt="Product 43">
+  <div class="product-name">Product Name 43</div>
+  <div class="combo-text">available in combo</div>
+</div>
+
+<div class="product-card">
+  <img data-src="images/image_44.jpg" src="placeholder.svg" alt="Product 44">
+  <div class="product-name">Product Name 44</div>
+  <div class="combo-text">available in combo</div>
+</div>
+
+<div class="product-card">
+  <img data-src="images/image_45.jpg" src="placeholder.svg" alt="Product 45">
+  <div class="product-name">Product Name 45</div>
+  <div class="combo-text">available in combo</div>
+</div>
+
+<div class="product-card">
+  <img data-src="images/image_46.jpg" src="placeholder.svg" alt="Product 46">
+  <div class="product-name">Product Name 46</div>
+  <div class="combo-text">available in combo</div>
+</div>
+
+<div class="product-card">
+  <img data-src="images/image_47.jpg" src="placeholder.svg" alt="Product 47">
+  <div class="product-name">Product Name 47</div>
+  <div class="combo-text">available in combo</div>
+</div>
+
+<div class="product-card">
+  <img data-src="images/image_48.jpg" src="placeholder.svg" alt="Product 48">
+  <div class="product-name">Product Name 48</div>
+  <div class="combo-text">available in combo</div>
+</div>
+
+<div class="product-card">
+  <img data-src="images/image_49.jpg" src="placeholder.svg" alt="Product 49">
+  <div class="product-name">Product Name 49</div>
+  <div class="combo-text">available in combo</div>
+</div>
+
+<div class="product-card">
+  <img data-src="images/image_50.jpg" src="placeholder.svg" alt="Product 50">
+  <div class="product-name">Product Name 50</div>
+  <div class="combo-text">available in combo</div>
+</div>
+
+<div class="product-card">
+  <img data-src="images/image_51.jpg" src="placeholder.svg" alt="Product 51">
+  <div class="product-name">Product Name 51</div>
+  <div class="combo-text">available in combo</div>
+</div>
+
+<div class="product-card">
+  <img data-src="images/image_52.jpg" src="placeholder.svg" alt="Product 52">
+  <div class="product-name">Product Name 52</div>
+  <div class="combo-text">available in combo</div>
+</div>
+
+<div class="product-card">
+  <img data-src="images/image_53.jpg" src="placeholder.svg" alt="Product 53">
+  <div class="product-name">Product Name 53</div>
+  <div class="combo-text">available in combo</div>
+</div>
+
+<div class="product-card">
+  <img data-src="images/image_54.jpg" src="placeholder.svg" alt="Product 54">
+  <div class="product-name">Product Name 54</div>
+  <div class="combo-text">available in combo</div>
+</div>
+
+<div class="product-card">
+  <img data-src="images/image_55.jpg" src="placeholder.svg" alt="Product 55">
+  <div class="product-name">Product Name 55</div>
+  <div class="combo-text">available in combo</div>
+</div>
+
+<div class="product-card">
+  <img data-src="images/image_56.jpg" src="placeholder.svg" alt="Product 56">
+  <div class="product-name">Product Name 56</div>
+  <div class="combo-text">available in combo</div>
+</div>
+
+<div class="product-card">
+  <img data-src="images/image_57.jpg" src="placeholder.svg" alt="Product 57">
+  <div class="product-name">Product Name 57</div>
+  <div class="combo-text">available in combo</div>
+</div>
+
+<div class="product-card">
+  <img data-src="images/image_58.jpg" src="placeholder.svg" alt="Product 58">
+  <div class="product-name">Product Name 58</div>
+  <div class="combo-text">available in combo</div>
+</div>
+
+<div class="product-card">
+  <img data-src="images/image_59.jpg" src="placeholder.svg" alt="Product 59">
+  <div class="product-name">Product Name 59</div>
+  <div class="combo-text">available in combo</div>
+</div>
+
+<div class="product-card">
+  <img data-src="images/image_60.jpg" src="placeholder.svg" alt="Product 60">
+  <div class="product-name">Product Name 60</div>
+  <div class="combo-text">available in combo</div>
+</div>
+
+<div class="product-card">
+  <img data-src="images/image_61.jpg" src="placeholder.svg" alt="Product 61">
+  <div class="product-name">Product Name 61</div>
+  <div class="combo-text">available in combo</div>
+</div>
+
+<div class="product-card">
+  <img data-src="images/image_62.jpg" src="placeholder.svg" alt="Product 62">
+  <div class="product-name">Product Name 62</div>
+  <div class="combo-text">available in combo</div>
+</div>
+
+<div class="product-card">
+  <img data-src="images/image_63.jpg" src="placeholder.svg" alt="Product 63">
+  <div class="product-name">Product Name 63</div>
+  <div class="combo-text">available in combo</div>
+</div>
+
+<div class="product-card">
+  <img data-src="images/image_64.jpg" src="placeholder.svg" alt="Product 64">
+  <div class="product-name">Product Name 64</div>
+  <div class="combo-text">available in combo</div>
+</div>
+
+<div class="product-card">
+  <img data-src="images/image_65.jpg" src="placeholder.svg" alt="Product 65">
+  <div class="product-name">Product Name 65</div>
+  <div class="combo-text">available in combo</div>
+</div>
+
+<div class="product-card">
+  <img data-src="images/image_66.jpg" src="placeholder.svg" alt="Product 66">
+  <div class="product-name">Product Name 66</div>
+  <div class="combo-text">available in combo</div>
+</div>
+
+<div class="product-card">
+  <img data-src="images/image_67.jpg" src="placeholder.svg" alt="Product 67">
+  <div class="product-name">Product Name 67</div>
+  <div class="combo-text">available in combo</div>
+</div>
+
+<div class="product-card">
+  <img data-src="images/image_68.jpg" src="placeholder.svg" alt="Product 68">
+  <div class="product-name">Product Name 68</div>
+  <div class="combo-text">available in combo</div>
+</div>
+
+<div class="product-card">
+  <img data-src="images/image_69.jpg" src="placeholder.svg" alt="Product 69">
+  <div class="product-name">Product Name 69</div>
+  <div class="combo-text">available in combo</div>
+</div>
+
+<div class="product-card">
+  <img data-src="images/image_70.jpg" src="placeholder.svg" alt="Product 70">
+  <div class="product-name">Product Name 70</div>
+  <div class="combo-text">available in combo</div>
+</div>
+
+<div class="product-card">
+  <img data-src="images/image_71.jpg" src="placeholder.svg" alt="Product 71">
+  <div class="product-name">Product Name 71</div>
+  <div class="combo-text">available in combo</div>
+</div>
+
+<div class="product-card">
+  <img data-src="images/image_72.jpg" src="placeholder.svg" alt="Product 72">
+  <div class="product-name">Product Name 72</div>
+  <div class="combo-text">available in combo</div>
+</div>
+
+<div class="product-card">
+  <img data-src="images/image_73.jpg" src="placeholder.svg" alt="Product 73">
+  <div class="product-name">Product Name 73</div>
+  <div class="combo-text">available in combo</div>
+</div>
+
+
+</body>
+</html>
