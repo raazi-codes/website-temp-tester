@@ -34,6 +34,7 @@
       height: auto;
       object-fit: cover;
       border-radius: 12px;
+      position: relative;
     }
 
     .image-container {
@@ -76,6 +77,7 @@
     }
   </style>
   <script>
+    // Disable right-click globally
     document.addEventListener("contextmenu", (e) => {
       e.preventDefault();
     });
@@ -83,26 +85,46 @@
     document.addEventListener("DOMContentLoaded", () => {
       const images = document.querySelectorAll("img[data-src]");
 
-      const loadImage = (image) => {
-        image.src = image.getAttribute("data-src");
-        image.removeAttribute("data-src");
+      const preloadImage = (image) => {
+        return new Promise((resolve) => {
+          const img = new Image();
+          img.src = image.getAttribute("data-src");
+          img.onload = () => resolve(img.src);
+          img.onerror = () => resolve(null); // Fallback in case of an error
+        });
+      };
+
+      const loadImage = async (image) => {
+        const loadedSrc = await preloadImage(image);
+        if (loadedSrc) {
+          image.src = loadedSrc;
+          image.removeAttribute("data-src");
+        }
       };
 
       const imageObserver = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
+        entries.forEach(async (entry) => {
           if (entry.isIntersecting) {
             const image = entry.target;
-
-            // Only load if not already loaded
-            if (image.dataset.src) {
-              loadImage(image);
+            await loadImage(image);
+            if (!image.hasAttribute("data-src")) {
+              imageObserver.unobserve(image); // Stop observing if loaded
             }
           }
         });
-      }, { threshold: 0.5 }); // Ensures image is at least 50% visible before loading
+      }, { threshold: 0.1 });
 
       images.forEach(image => {
         imageObserver.observe(image);
+      });
+
+      // When internet comes back, re-observe images that were not loaded
+      window.addEventListener("online", () => {
+        images.forEach(image => {
+          if (image.hasAttribute("data-src")) {
+            imageObserver.observe(image); // Re-observe only failed images
+          }
+        });
       });
     });
   </script>
@@ -126,10 +148,6 @@
     <div class="product-name">Product Name 2</div>
     <div class="combo-text">Available</div>
   </div>
-
-</body>
-</html>
-
 
 </body>
 </html>
