@@ -82,7 +82,7 @@
       e.preventDefault();
     });
 
-    // Lazy load images and retry loading on network recovery
+    // Lazy load images when they come into view and are fully downloaded
     document.addEventListener("DOMContentLoaded", () => {
       const images = document.querySelectorAll("img[data-src]");
 
@@ -91,7 +91,7 @@
           const img = new Image();
           img.src = image.getAttribute("data-src");
           img.onload = () => resolve(img.src);
-          img.onerror = () => resolve(null); // Fallback if loading fails
+          img.onerror = () => resolve(null); // Fallback in case of an error
         });
       };
 
@@ -108,22 +108,13 @@
           if (entry.isIntersecting) {
             const image = entry.target;
             await loadImage(image);
-            imageObserver.unobserve(image); // Stop observing once loaded
+            imageObserver.unobserve(image);
           }
         });
       }, { threshold: 0.1 });
 
       images.forEach(image => {
         imageObserver.observe(image);
-      });
-
-      // Retry loading images when internet comes back
-      window.addEventListener("online", () => {
-        images.forEach(async (image) => {
-          if (image.hasAttribute("data-src")) {
-            await loadImage(image);
-          }
-        });
       });
     });
   </script>
@@ -147,7 +138,6 @@
     <div class="product-name">Product Name 2</div>
     <div class="combo-text">Available</div>
   </div>
-
 
   <div class="product-card">
     <div class="image-container">
