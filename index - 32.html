@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Product Cards with Lazy Loading</title>
+  <title>Product Cards with Quantity</title>
   <style>
     body {
       margin: 0;
@@ -35,6 +35,7 @@
       object-fit: cover;
       border-radius: 12px;
       position: relative;
+      transition: opacity 0.3s ease-in-out;
     }
 
     .image-container {
@@ -76,6 +77,37 @@
       }
     }
   </style>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const images = document.querySelectorAll("img[data-src]");
+
+      const loadImage = (image) => {
+        const newImg = new Image();
+        newImg.src = image.getAttribute("data-src");
+
+        newImg.onload = () => {
+          image.src = newImg.src; // Replace only after loading
+          image.removeAttribute("data-src");
+        };
+      };
+
+      const imageObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const image = entry.target;
+            if (image.hasAttribute("data-src")) {
+              loadImage(image);
+              observer.unobserve(image); // Stop observing after loading
+            }
+          }
+        });
+      }, { threshold: 0.1 });
+
+      images.forEach(image => {
+        imageObserver.observe(image);
+      });
+    });
+  </script>
 </head>
 <body>
 
@@ -97,50 +129,12 @@
     <div class="combo-text">Available</div>
   </div>
 
-  <script>
-    // Disable right-click globally
-    document.addEventListener("contextmenu", (e) => {
-      e.preventDefault();
-    });
-
-    // Lazy load images when they come into view
-    document.addEventListener("DOMContentLoaded", () => {
-      const images = document.querySelectorAll("img[data-src]");
-
-      const preloadImage = (image) => {
-        return new Promise((resolve, reject) => {
-          const img = new Image();
-          img.src = image.getAttribute("data-src");
-          img.onload = () => resolve(img.src);
-          img.onerror = () => reject(); // Retry on error
-        });
-      };
-
-      const loadImage = async (image) => {
-        try {
-          const loadedSrc = await preloadImage(image);
-          image.src = loadedSrc;
-          image.removeAttribute("data-src");
-          observer.unobserve(image); // Stop observing once loaded
-        } catch {
-          observer.observe(image); // Keep observing for retries
-        }
-      };
-
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(async (entry) => {
-          if (entry.isIntersecting && entry.target.hasAttribute("data-src")) {
-            await loadImage(entry.target);
-          }
-        });
-      }, { threshold: 0.1 });
-
-      images.forEach(image => observer.observe(image));
-    });
-  </script>
+</body>
+</html>
 
 </body>
 </html>
+
 
   <div class="product-card">
     <div class="image-container">
